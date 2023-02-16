@@ -7,7 +7,7 @@ public class person {
 	private String SSN;
 	
 	
-	public person(String firstname, String lastname, String email, String SNN) {
+	public person(String firstname, String lastname, String email, String SSN) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;

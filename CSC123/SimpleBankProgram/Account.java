@@ -53,7 +53,7 @@ public class Account {
 	}
 	
 	public String toString() {
-		return accountnumber+":"+accountOpen+":"+balance+":"+accountHolder;
+		return accountnumber+"("+accountType+")"+accountOpen+":"+balance+":"+accountHolder;
 	}
 	
 	
