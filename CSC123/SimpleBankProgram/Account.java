@@ -13,6 +13,7 @@ public class Account {
 		this.accountnumber = accountnumber;
 		this.accountHolder = accountHolder;
 		this.accountType = accountType;
+		this.accountOpen = true;
 	}
 	
 	//methods
@@ -29,7 +30,7 @@ public class Account {
 		return true;
 	}
 	
-	public void
+	//public void
 
 	public int getAccountnumber() {
 		return accountnumber;
