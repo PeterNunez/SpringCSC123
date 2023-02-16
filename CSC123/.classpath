@@ -7,5 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="HW3"/>
+	<classpathentry kind="src" path="SimpleBankProgram"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
