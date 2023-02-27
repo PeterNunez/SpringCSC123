@@ -13,6 +13,42 @@ public class Information {
 		this.SSN = SSN;
 		this.Overdraft = Overdraft;
 	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public String getSSN() {
+		return SSN;
+	}
+
+	public String getOverdraft() {
+		return Overdraft;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public void setSSN(String SSN) {
+		this.SSN = SSN;
+	}
+
+	public void setOverdraft(String Overdraft) {
+		this.Overdraft = Overdraft;
+	}
+	
+	public String toString () {
+		return firstname+" "+lastname+" "+SSN+" "+Overdraft;
+	}
 	
 	
 	
