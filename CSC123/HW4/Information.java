@@ -1,4 +1,4 @@
-
+//Pedro Nunez (pnunez14@toromail.csudh.edu)
 public class Information {
 
 	private String firstname;
