@@ -14,13 +14,25 @@ public class Menu {
 			Scanner Input = new Scanner(System.in);
 			
 			System.out.println("\n1 - Open a Checking Account\n2 - Open Saving Account\n3 - List Accounts\n4 - Account Statement\n"
-					+ "5 - Deposit funds\n6 - Withdraw funds\n7 - Close an Account\n8 - Exit");
+					+ "5 - Deposit funds\n6 - Withdraw funds\n7 - Close an Account\n8 - Exit\n");
 			System.out.println("Please Enter Your choice: ");
 			Userselect = Input.nextInt();
 			
 			
 			switch(Userselect) {
 			case 1:
+				System.out.print("Enter first name: ");
+				person.setFirstname(Keyboard.nextLine());
+				
+				System.out.print("Enter last name: ");
+				person.setLastname(Keyboard.nextLine());
+				
+				System.out.print("Enter social secuirty number: ");
+				person.setSSN(Keyboard.nextLine());
+				
+				System.out.print("Enter overdraft limit: ");
+				person.setOverdraft(Keyboard.nextLine());
+				
 				break;
 			case 2:
 				break;
@@ -35,6 +47,7 @@ public class Menu {
 			case 7:
 				break;
 			case 8:
+				System.exit(0);
 				break;
 				default:
 					break;
