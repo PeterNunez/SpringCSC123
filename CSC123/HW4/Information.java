@@ -4,9 +4,9 @@ public class Information {
 	private String firstname;
 	private String lastname;
 	private String SSN;
-	private String Overdraft;
+	private int Overdraft;
 	
-	public Information(String firstname, String lastname, String SSN, String Overdraft) {
+	public Information(String firstname, String lastname, String SSN, int Overdraft) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -26,7 +26,7 @@ public class Information {
 		return SSN;
 	}
 
-	public String getOverdraft() {
+	public int getOverdraft() {
 		return Overdraft;
 	}
 
@@ -42,7 +42,7 @@ public class Information {
 		this.SSN = SSN;
 	}
 
-	public void setOverdraft(String Overdraft) {
+	public void setOverdraft(int Overdraft) {
 		this.Overdraft = Overdraft;
 	}
 	

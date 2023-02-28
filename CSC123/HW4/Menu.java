@@ -10,7 +10,7 @@ public class Menu {
 		
 		int Userselect;
 		do {
-			Information person = new Information(null,null,null,null);
+			Information person = new Information(null,null,null,0);
 			Scanner Input = new Scanner(System.in);
 			
 			System.out.println("\n1 - Open a Checking Account\n2 - Open Saving Account\n3 - List Accounts\n4 - Account Statement\n"
@@ -31,7 +31,7 @@ public class Menu {
 				person.setSSN(Keyboard.nextLine());
 				
 				System.out.print("Enter overdraft limit: ");
-				person.setOverdraft(Keyboard.nextLine());
+				person.setOverdraft(Keyboard.nextInt());
 				
 				break;
 			case 2:
