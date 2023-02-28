@@ -1,4 +1,5 @@
 //Pedro Nunez (pnunez14@toromail.csudh.edu)
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -7,7 +8,8 @@ public class Menu {
 		// TODO Auto-generated method stub
 		
 		Scanner Keyboard = new Scanner(System.in);
-		
+		try {
+			
 		int Userselect;
 		do {
 			Information person = new Information(null,null,null,0);
@@ -53,9 +55,14 @@ public class Menu {
 					break;
 				
 			}
+		
+		
 			
 		}while(Userselect > 0||Userselect < 9);
 		
+	 }catch(InputMismatchException e) {
+		 System.out.println("Please try again Characters aren't allowed for chosing your option. ");
+	 }
 		
 	}
 
