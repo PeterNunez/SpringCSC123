@@ -12,8 +12,9 @@ public class Menu {
 		do {
 			Scanner Input = new Scanner(System.in);
 			
-			System.out.println("\n1 - Open a Checking Account\n2 - Open Saving Account\n3 - List Accounts\n4 - Account Statement");
-			System.out.println("Please Enter Your choice:" );
+			System.out.println("\n1 - Open a Checking Account\n2 - Open Saving Account\n3 - List Accounts\n4 - Account Statement\n"
+					+ "5 - Deposit funds\n6 - Withdraw funds\n7 - Close an Account\n8 - Exit");
+			System.out.println("Please Enter Your choice: ");
 			Userselect = Input.nextInt();
 			
 			
