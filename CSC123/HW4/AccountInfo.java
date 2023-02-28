@@ -21,4 +21,10 @@ public class AccountInfo {
 		return true;
 	}
 	
+	public boolean withdraw(double amount) {
+		
+		if(balance - amount < 0) return false;
+		balance=balance-amount;
+		return true;
+	}
 }

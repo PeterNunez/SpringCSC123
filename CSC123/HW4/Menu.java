@@ -35,8 +35,17 @@ public class Menu {
 				System.out.print("Enter overdraft limit: ");
 				person.setOverdraft(Keyboard.nextInt());
 				
+				System.out.print("Thank you the account number is ");
 				break;
 			case 2:
+				System.out.print("Enter first name: ");
+				person.setFirstname(Keyboard.nextLine());
+				
+				System.out.print("Enter last name: ");
+				person.setLastname(Keyboard.nextLine());
+				
+				System.out.print("Enter Social secuirty number: ");
+				person.setSSN(Keyboard.nextLine());
 				break;
 			case 3:
 				break;
