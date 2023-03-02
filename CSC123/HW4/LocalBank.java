@@ -7,7 +7,7 @@ public class LocalBank {
 	
 	private LocalBank() {}
 	
-	public static AccountInfo bankinterface(int accountnumber, Information accountHolder, String accountType) {
+	public static AccountInfo bankinterface(int accountNumber, Information accountHolder, String accountType) {
 		
 		AccountInfo in = new AccountInfo(accountcounter++, accountHolder, accountType);
 		listing.add(in);

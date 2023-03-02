@@ -27,4 +27,28 @@ public class AccountInfo {
 		balance=balance-amount;
 		return true;
 	}
+
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	public Information getAccountHolder() {
+		return accountHolder;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public boolean isAccountOpen() {
+		return accountOpen;
+	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+	
+	public String toString() {
+		return accountNumber+"("+accountType+")"+accountOpen+":"+balance+":"+accountHolder;
+	}
 }
