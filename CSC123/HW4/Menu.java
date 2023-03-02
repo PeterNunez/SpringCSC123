@@ -23,6 +23,8 @@ public class Menu {
 			
 			switch(Userselect) {
 			case 1:
+				 AccountInfo in = LocalBank.bankinterface(1, person, "Checking");
+				 
 				System.out.print("Enter first name: ");
 				person.setFirstname(Keyboard.nextLine());
 				
@@ -35,8 +37,9 @@ public class Menu {
 				System.out.print("Enter overdraft limit: ");
 				person.setOverdraft(Keyboard.nextInt());
 				
-				System.out.print("Thank you the account number is ");
+				System.out.print("Thank you the account number is "+in.getAccountNumber());
 				break;
+				
 			case 2:
 				System.out.print("Enter first name: ");
 				person.setFirstname(Keyboard.nextLine());
