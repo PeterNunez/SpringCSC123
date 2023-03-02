@@ -7,11 +7,11 @@ public class AccountInfo {
 	private boolean accountOpen;
 	private String accountType;
 	
-	public AccountInfo(int accountNumber, Information accountHolder, boolean accountOpen, String accountType) {
+	public AccountInfo(int accountNumber, Information accountHolder, String accountType) {
 		super();
 		this.accountNumber = accountNumber;
 		this.accountHolder = accountHolder;
-		this.accountOpen = accountOpen;
+		this.accountOpen = true;
 		this.accountType = accountType;
 	}
 	
