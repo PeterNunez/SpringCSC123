@@ -14,7 +14,7 @@ public class Menu {
 			Scanner Input = new Scanner(System.in);
 			
 			System.out.println("\n1 - Open a Checking Account\n2 - Open Saving Account\n3 - List Accounts\n4 - Account Statement\n"
-					+ "5 - Deposit funds\n6 - Withdraw funds\n7 - Close an Account\n8 - Exit\n");
+					+ "5 - Deposit funds\n6 - Withdraw funds\n7 - Close an Account\n8 - Save Transactions\n9 - Exit\n");
 			System.out.print("Please Enter Your choice: ");
 			Userselect = Input.nextInt();
 			
@@ -44,13 +44,13 @@ public class Menu {
 				AccountInfo in2 = LocalBank.bankinterface(null, null, null, 0.0, "Saving", null);
 
 				System.out.print("\nEnter first name: ");
-				in2.getAccountHolder().setFirstname(Keyboard.nextLine());
+				in2.getAccountHolder().setFirstname(Keyboard.next());
 			
 				System.out.print("Enter last name: ");
-				in2.getAccountHolder().setLastname(Keyboard.nextLine());
+				in2.getAccountHolder().setLastname(Keyboard.next());
 			
 				System.out.print("Enter social secuirty number: ");
-				in2.getAccountHolder().setSSN(Keyboard.nextLine());
+				in2.getAccountHolder().setSSN(Keyboard.next());
 			
 				System.out.print("\nThank you the account number is "+in2.getAccountNumber()+"\n");
 				LocalBank.getstat(in2.getAccountNumber(), "Open");
@@ -125,6 +125,9 @@ public class Menu {
 				}
 				break;
 			case 8:
+				
+				break;
+			case 9:
 				System.exit(0);
 				break;
 				default:
@@ -134,7 +137,7 @@ public class Menu {
 		
 		
 			
-		}while(Userselect > 0|| Userselect < 9);
+		}while(Userselect > 0|| Userselect < 10);
 		
 	 }catch(InputMismatchException e) {
 		 System.out.println("Please try again Characters aren't allowed for chosing your option. ");
