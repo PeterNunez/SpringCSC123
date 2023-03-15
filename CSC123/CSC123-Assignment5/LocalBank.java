@@ -46,6 +46,14 @@ public class LocalBank {
 
         return null;
 	}
+	
+	public static String exist(int accountNum) throws NoSuchAccountException {
+		for(AccountInfo in: listing) {
+			if(accountNum == in.getAccountNumber())return "Closed";
+			
+		}
+		return null;
+	}
 
 	public static boolean deposit(int accountNumber, double amount) throws AccountClosedException {
 
