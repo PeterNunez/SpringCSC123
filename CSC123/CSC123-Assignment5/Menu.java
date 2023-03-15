@@ -84,8 +84,12 @@ public class Menu {
 				}
 				System.out.print("Enter the amount to deposit: ");
 				double newD = Keyboard.nextDouble();
+				try {
 				LocalBank.deposit(searchString,newD);
 				LocalBank.find(searchString);
+				}catch(AccountClosedException e) {
+					System.out.println(e.getMessage());
+				}
 				System.out.println("Deposit successful, the new balance is: $" + LocalBank.find(searchString)+ "\n");
 				break;
 
@@ -99,8 +103,12 @@ public class Menu {
 				}
 				System.out.print("Enter the amount to withdraw: ");
 				double newWithdraw = Keyboard.nextDouble();
+				try {
 				LocalBank.withdraw(numberAcc, newWithdraw);
 				LocalBank.find(numberAcc);
+				}catch(AccountClosedException e) {
+					System.out.println(e.getMessage());
+				}
 				System.out.println("Withdraw successful, the new balance is: $"+LocalBank.find(numberAcc));
 				break;
 

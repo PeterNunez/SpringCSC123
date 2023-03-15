@@ -51,16 +51,12 @@ public class LocalBank {
 
 		
 		for(AccountInfo in: listing)
-			try {
 		if(amount < 0 || in.isAccountOpen()== "closed") return false;
 		else{
 			if(in.getAccountNumber() == accountNumber){
 			in.setBalance(in.getBalance() + amount);
 			in.deposit(amount);
 			}
-		}
-		}catch(AccountClosedException e) {
-			System.out.println(e.getMessage());
 		}
 		return true;
 	}
@@ -77,6 +73,14 @@ public class LocalBank {
 		} 
 		
 		return true;
+	}
+	
+	public static boolean check(int numberacc) throws AccountClosedException {
+		
+		for(AccountInfo in: listing)
+			if(in.isAccountOpen() == "closed") return false;{
+				throw new AccountClosedException("Your account is closed and your're unable to deposit or withdraw more than what is left in your account");
+			}
 	}
 
 	public static double find(int accountNum) {
