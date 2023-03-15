@@ -7,7 +7,7 @@ public class LocalBank {
 	private static int accountcounter = 1;
 	private static int transactionCounter = 1;
 	
-	private LocalBank() {}
+	private LocalBank() throws AccountClosedException {}
 	
 	public static AccountInfo bankinterface(String firstname, String lastname, String SSN, double Overdraft, String accountType, String type) {
 
@@ -47,9 +47,11 @@ public class LocalBank {
         return null;
 	}
 
-	public static boolean deposit(int accountNumber, double amount) {
+	public static boolean deposit(int accountNumber, double amount) throws AccountClosedException {
 
+		
 		for(AccountInfo in: listing)
+			try {
 		if(amount < 0 || in.isAccountOpen()== "closed") return false;
 		else{
 			if(in.getAccountNumber() == accountNumber){
@@ -57,10 +59,13 @@ public class LocalBank {
 			in.deposit(amount);
 			}
 		}
+		}catch(AccountClosedException e) {
+			System.out.println(e.getMessage());
+		}
 		return true;
 	}
 
-	public static boolean withdraw(int accountNum, double amount) {
+	public static boolean withdraw(int accountNum, double amount) throws AccountClosedException {
 		
 		for(AccountInfo in: listing)
 		if(in.getBalance() - amount < 0 || in.isAccountOpen() == "closed") return false;
