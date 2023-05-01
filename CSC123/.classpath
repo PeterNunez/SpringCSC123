@@ -9,5 +9,6 @@
 	<classpathentry kind="src" path="HW3"/>
 	<classpathentry kind="src" path="SimpleBankProgram"/>
 	<classpathentry kind="src" path="HW4"/>
+	<classpathentry kind="src" path="CSC123-Assignment5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
