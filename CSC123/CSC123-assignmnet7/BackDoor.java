@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class BackDoor {
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
 
 		
 			ServerSocket server=new ServerSocket(2001);
