@@ -1,50 +1,48 @@
-
+//Pedro Nunez (pnunez14@toromail.csudh.edu)
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
-
-//Pedro Nunez (pnunez14@toromail.csudh.edu)
 public class AccountInfo {
 
 	private int accountNumber;
 	private Information accountHolder;
 	private double balance;
-	private String accountOpen;
 	private String accountType;
-	private int TransactionID;
 	private String type;
-	private ArrayList<String> transaction = new ArrayList<String>();
+	private ArrayList<Transaction> transaction;
+	private boolean open=true;
 	
-	public AccountInfo(int accountNumber, Information accountHolder, String accountType, int TransactionID, String type) {
+	public AccountInfo(int accountNumber, Information accountHolder, String accountType, String type) {
 		super();
 		this.accountNumber = accountNumber;
 		this.accountHolder = accountHolder;
-		this.accountOpen = "Open";
 		this.accountType = accountType;
-		this.TransactionID = TransactionID;
 		this.type = type;
+		transaction = new ArrayList<Transaction>();
 		
 	}
 
-	public void Statment() {
-		for(String a:transaction) {
-			System.out.println(a);
+	public void deposit(double amount) throws AccountClosedException{
+		double value=getBalance();
+		if(!isAccountOpen()&&value>=0) {
+			throw new AccountClosedException("\nYour account is closed and your're unable to deposit or withdraw more than what is left in your account\n");
 		}
-		System.out.print("\nBalance: $"+balance);
+		transaction.add(new Transaction(Transaction.credit,amount));
 	}
 
-	public void deposit(double amount) {
-		type = String.format("%d : Credit : %.2f", TransactionID++, amount);
-		transaction.add(type);
-	}
-
-	public void withdraw(double amount) {
-		type = String.format("%d : Debit  : %.2f",TransactionID++, amount);
-		transaction.add(type);
+	public void withdraw(double amount) throws InsufficientBalanceException{
+		double value=getBalance();
+		
+		if(!isAccountOpen()&&value<=0) {
+			throw new InsufficientBalanceException("\nThe account is closed and balance is: "+value+"\n\n");
+		}
+		transaction.add(new Transaction(Transaction.debt,amount));
 	}
 	
 
 	public void closeAccount() {
-		this.accountOpen="Closed";
+		open = false;
 	}
 
 	public int getAccountNumber() {
@@ -56,16 +54,19 @@ public class AccountInfo {
 	}
 
 	public double getBalance() {
-		return balance;
+		double newBalance = 0;
+		
+		for(Transaction okay: transaction) {
+			if(okay.getType()==Transaction.credit)newBalance+= okay.getNewamount();
+			else newBalance-= okay.getNewamount();
+		}
+		return newBalance;
 	}
 
-	public String isAccountOpen() {
-		return this.accountOpen;
+	public boolean isAccountOpen() {
+		return open;
 	}
 
-	public void setAccountOpen(String accountOpen) {
-		this.accountOpen = accountOpen;
-	}
 
 	public String getAccountType() {
 		return accountType;
@@ -73,10 +74,6 @@ public class AccountInfo {
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}
-
-	public int getTransactionID() {
-		return TransactionID;
 	}
 
 	public void setType(String type) {
@@ -88,6 +85,21 @@ public class AccountInfo {
 	}
 
 	public String toString() {
-		return accountNumber+" ("+accountType+") "+getAccountHolder().getFirstname()+" : "+getAccountHolder().getLastname()+" : "+getAccountHolder().getSSN()+" :  $"+balance+" : "+accountOpen;
+		return accountNumber+" ("+accountType+") "+getAccountHolder().getFirstname()+" : "+getAccountHolder().getLastname()+" : "+getAccountHolder().getSSN()+" :  $"+balance+" : "+isAccountOpen();
+	}
+	
+	public void printTransactions(OutputStream out) throws IOException {
+		
+		out.write("\n\n".getBytes());
+		out.write("------------------\n".getBytes());
+	
+		for(Transaction t: transaction) {
+			out.write(t.toString().getBytes());
+			out.write((byte)10);
+		}
+		out.write("------------------\n".getBytes());
+		out.write(("Balance: "+getBalance()+"\n\n\n").getBytes());
+		out.flush();
+		
 	}
 }

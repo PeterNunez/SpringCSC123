@@ -1,9 +1,15 @@
 //Pedro Nunez (pnunez14@toromail.csudh.edu)
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 public class LocalBank {
 
-	private static ArrayList<AccountInfo> listing = new ArrayList<AccountInfo>();
+	private static Map<Integer, AccountInfo> listing = new TreeMap<Integer, AccountInfo>();
 	private static int accountcounter = 1;
 	private static int transactionCounter = 1;
 	
@@ -12,86 +18,77 @@ public class LocalBank {
 	public static AccountInfo bankinterface(String firstname, String lastname, String SSN, double Overdraft, String accountType, String type) {
 
 		Information person = new Information(firstname, lastname, SSN, Overdraft);
-		AccountInfo in = new AccountInfo(accountcounter++, person, accountType, transactionCounter++,type);
+		AccountInfo in = new AccountInfo(accountcounter++, person, accountType, type);
 		
-		listing.add(in);
+		listing.put(in.getAccountNumber(), in);
 		return in;
 	}
 
 	
 
-	public static void printstatment(int accNumber) {
+	/*public static void printstatment(int accNumber) {
 		for(AccountInfo in:listing) {
 			if(accNumber == in.getAccountNumber()){
-				//System.out.print(in.getTransactionID()+" : "+in.getType()+" : "+in.getBalance());
 				in.Statment();
 			}
 			
 		}
 		
-	}
+	}*/
 	
 	public static void listAccounts() {
-		for(AccountInfo as: listing) {
-			System.out.println(as);
+		
+		Collection<AccountInfo> things= listing.values();
+		
+		for (AccountInfo e:things) {
+			System.out.println(e);
 		}
 	}
+	
+	public static void printAccountTransactions(int accountNumber, OutputStream out) throws IOException,NoSuchAccountException{
+		
+		search(accountNumber).printTransactions(out);
+	}
 
-	public static String search(int accountNum) {
+	public static AccountInfo search(int accountNum) throws NoSuchAccountException{
 
-        for(AccountInfo r: listing) {
-            if(accountNum == r.getAccountNumber()) return "Closed";
-            
-        }
+        
+            if(!listing.containsKey(accountNum)) {
+            	throw new NoSuchAccountException("\nAccount Number: "+accountNum+" not found!\n ");
+            }
 
-        return null;
+        return listing.get(accountNum);
 	}
 	
-	public static String exist(int accountNum) throws NoSuchAccountException {
-		for(AccountInfo in: listing) {
-			if(accountNum == in.getAccountNumber())return "Closed";
+	public static AccountInfo exist(int accountNum) throws NoSuchAccountException {
+		
+			if(listing.containsKey(accountNum)) {
+				throw new NoSuchAccountException("\nAccount Number: "+accountNum+" not found!\n");
+			}
 			
-		}
-		return null;
+		return listing.get(accountNum);
 	}
 
-	public static boolean deposit(int accountNumber, double amount) throws AccountClosedException {
+	public static void deposit(int accountNumber, double amount) throws AccountClosedException, NoSuchAccountException {
 
+		search(accountNumber).deposit(amount);
 		
-		for(AccountInfo in: listing)
-		if(amount < 0 || in.isAccountOpen()== "closed") return false;
-		else{
-			if(in.getAccountNumber() == accountNumber){
-			in.setBalance(in.getBalance() + amount);
-			in.deposit(amount);
-			}
-		}
-		return true;
 	}
 
-	public static boolean withdraw(int accountNum, double amount) throws AccountClosedException {
+	public static void withdraw(int accountNum, double amount) throws AccountClosedException, InsufficientBalanceException, NoSuchAccountException {
 		
-		for(AccountInfo in: listing)
-		if(in.getBalance() - amount < 0 || in.isAccountOpen() == "closed") return false;
-		else { 
-			if(in.getAccountNumber() == accountNum){
-				in.setBalance(in.getBalance() - amount);
-				in.withdraw(amount);
-			}
-		} 
-		
-		return true;
+		search(accountNum).withdraw(amount);
 	}
 	
-	public static boolean check(int numberacc) throws AccountClosedException {
-		
-		for(AccountInfo in: listing)
-			if(in.isAccountOpen() == "closed") return false;{
-				throw new AccountClosedException("Your account is closed and your're unable to deposit or withdraw more than what is left in your account");
-			}
+	public static double getBalance(int accountNumber) throws NoSuchAccountException {
+		return search(accountNumber).getBalance();
+	}
+	
+	public static void closeAccount(int accountNumber) throws NoSuchAccountException {
+		search(accountNumber).closeAccount();
 	}
 
-	public static double find(int accountNum) {
+	/*public static double find(int accountNum) {
 
         for(AccountInfo in: listing) {
             if(in.getAccountNumber() == accountNum) return in.getBalance();
@@ -99,30 +96,5 @@ public class LocalBank {
 
         return 0;
 
-    }
-
-	public static AccountInfo getstat(int accNumber, String Closed) {
-
-		for(AccountInfo in: listing) {
-			if(accNumber == in.getAccountNumber()){
-				in.setAccountOpen(Closed);
-				
-			}
-			
-		}
-		return null;
-
-	}
-
-	public static String setStatus(int accNumber) {
-
-		for(AccountInfo in: listing) {
-			if(accNumber == in.getAccountNumber()) {
-				return in.isAccountOpen();
-
-			}
-		}
-
-		return null;
-	}
+    }*/
 }

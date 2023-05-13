@@ -1,11 +1,21 @@
 //Pedro Nunez (pnunez14@toromail.csudh.edu)
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
+	
+	InputStream in;
+	OutputStream out;
+	public Menu(InputStream in, OutputStream out) {
+		this.in=in;
+		this.out=out;
+	}
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws IOException, NoSuchAccountException, InsufficientBalanceException {
+		new Menu(System.in,System.out);
 		try {
 			Scanner Keyboard = new Scanner(System.in);
 		int Userselect;
@@ -36,7 +46,7 @@ public class Menu {
 				in.getAccountHolder().setOverdraft(Keyboard.nextDouble());
 				
 				System.out.print("\nThank you the account number is "+in.getAccountNumber()+"\n");
-				LocalBank.getstat(in.getAccountNumber(), "Open");
+				//LocalBank.getstat(in.getAccountNumber(), "Open");
 				break;
 				
 			case 2:
@@ -53,7 +63,7 @@ public class Menu {
 				in2.getAccountHolder().setSSN(Keyboard.next());
 			
 				System.out.print("\nThank you the account number is "+in2.getAccountNumber()+"\n");
-				LocalBank.getstat(in2.getAccountNumber(), "Open");
+				//LocalBank.getstat(in2.getAccountNumber(), "Open");
 				break;
 
 			case 3:
@@ -69,7 +79,7 @@ public class Menu {
 					System.out.print("Account not found");
 					break;
 				}
-				LocalBank.printstatment(number);
+				
 				
 				
 				
@@ -86,11 +96,10 @@ public class Menu {
 				double newD = Keyboard.nextDouble();
 				try {
 				LocalBank.deposit(searchString,newD);
-				LocalBank.find(searchString);
 				}catch(AccountClosedException e) {
 					System.out.println(e.getMessage());
 				}
-				System.out.println("Deposit successful, the new balance is: $" + LocalBank.find(searchString)+ "\n");
+				System.out.println("Deposit successful, the new balance is: $" + LocalBank.getBalance(searchString)+ "\n");
 				break;
 
 			case 6:
@@ -105,11 +114,10 @@ public class Menu {
 				double newWithdraw = Keyboard.nextDouble();
 				try {
 				LocalBank.withdraw(numberAcc, newWithdraw);
-				LocalBank.find(numberAcc);
 				}catch(AccountClosedException e) {
 					System.out.println(e.getMessage());
 				}
-				System.out.println("Withdraw successful, the new balance is: $"+LocalBank.find(numberAcc));
+				System.out.println("Withdraw successful, the new balance is: $"+LocalBank.getBalance(numberAcc)+"\n");
 				break;
 
 			case 7:
@@ -120,8 +128,8 @@ public class Menu {
 					System.out.print("Account not found");
 					break;
 				}else{
-					LocalBank.getstat(numbAcc, "Closed");
-					System.out.println("Account closed, current balance is "+LocalBank.find(numbAcc)+". Deposits are no longer possible");
+					LocalBank.closeAccount(numbAcc);
+					System.out.println("Account closed, current balance is "+LocalBank.search(numbAcc)+". Deposits are no longer possible");
 				}
 				break;
 			case 8:
