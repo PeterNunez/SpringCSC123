@@ -1,4 +1,4 @@
-
+//Pedro Nunez (pnunez14@toromail.csudh.edu)
 public class Transaction {
 
 	public static final char credit='C';
